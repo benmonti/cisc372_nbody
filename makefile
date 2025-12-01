@@ -1,4 +1,5 @@
-FLAGS = -DDEBUG -lineinfo -Xcompiler -WallLIBS= -lm
+FLAGS = -DDEBUG -lineinfo -Xcompiler -Wall
+LIBS= -lm
 ALWAYS_REBUILD=makefile
 
 nbody: nbody.o compute.o
