@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 {
 	clock_t t0 = clock();
 	int t_now;
-	// srand(time(NULL));
+	srand(time(NULL));
 	srand(1234);
 	initHostMemory(NUMENTITIES);
 	planetFill();
@@ -119,11 +119,11 @@ int main(int argc, char **argv)
 	cudaMemcpy(d_mass, mass, sizeof(double) * NUMENTITIES, cudaMemcpyHostToDevice);
 	for (t_now = 0; t_now < DURATION; t_now += INTERVAL)
 	{
-		int threadsPerBlock = 256;
+		int threadsPerBlock = 128;
 		int blocks = (NUMENTITIES + threadsPerBlock - 1) / threadsPerBlock;
 
 		compute<<<blocks, threadsPerBlock>>>(d_hPos, d_hVel, d_mass);
-		cudaDeviceSynchronize(); // wait for completion
+		cudaDeviceSynchronize();
 	}
 	clock_t t1 = clock() - t0;
 #ifdef DEBUG

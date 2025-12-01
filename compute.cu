@@ -10,8 +10,6 @@
 // Side Effect: Modifies the hPos and hVel arrays with the new positions and accelerations after 1 INTERVAL
 __global__ void compute(vector3 *d_hPos, vector3 *d_hVel, double *d_mass)
 {
-	// make an acceleration matrix which is NUMENTITIES squared in size;
-
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
 	if (i >= NUMENTITIES)
 		return;
